@@ -19,7 +19,6 @@
 
 
 using namespace std;
-using namespace a_land;
 
 /* --- cXmlCache ------------------------------------------------------------ */
 
@@ -111,7 +110,7 @@ void cXmlCache::add_track(const cTrackInfo &trackinfo, bool save)
             trackinfo.get_title().empty())
                 return;
 
-        a_land::TiXmlElement track("track");
+        TiXmlElement track("track");
         track.SetAttribute("path", trackinfo.get_partial_path());
         track.SetAttribute("date", trackinfo.get_date());
         track.SetAttribute("time", trackinfo.get_time());
@@ -146,7 +145,7 @@ void cXmlCache::add_track(const cTrackInfo &trackinfo, bool save)
 
 void cXmlCache::copy_to_objects(void)
 {
-        a_land::TiXmlElement *xml_track = get_root()->FirstChildElement("track");
+        TiXmlElement *xml_track = get_root()->FirstChildElement("track");
 
         while (xml_track) {
                 cTrackInfo trackinfo;
@@ -155,7 +154,7 @@ void cXmlCache::copy_to_objects(void)
 
                 if (path.empty()) {
                         /* remove deleted files from the xml-cache */
-                        a_land::TiXmlElement *tmp = xml_track;
+                        TiXmlElement *tmp = xml_track;
                         xml_track = xml_track->NextSiblingElement("track");
                         get_root()->RemoveChild(tmp);
 
@@ -169,7 +168,7 @@ void cXmlCache::copy_to_objects(void)
                 if (access(path.c_str(), F_OK) == -1) {
                         dsyslog("[audiorecorder]: copy %s : (%s, %s())", path.c_str(), __FILE__, __func__);
                         /* remove deleted files from the xml-cache */
-                        a_land::TiXmlElement *tmp = xml_track;
+                        TiXmlElement *tmp = xml_track;
                         xml_track = xml_track->NextSiblingElement("track");
                         get_root()->RemoveChild(tmp);
 
@@ -181,7 +180,7 @@ void cXmlCache::copy_to_objects(void)
                 if (xml_track->Attribute("time"))
                         trackinfo.set_time(xml_track->Attribute("time"));
 
-                for (a_land::TiXmlElement *element = xml_track->FirstChildElement();
+                for (TiXmlElement *element = xml_track->FirstChildElement();
                      element; element = element->NextSiblingElement()) {
                         if (element->FirstChild() == NULL)
                                 continue;

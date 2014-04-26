@@ -8,9 +8,7 @@
 
 #include <unistd.h>
 
-
 using namespace std;
-using namespace a_land;
 
 /* --- cXmlBase ------------------------------------------------------------- */
 

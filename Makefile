@@ -49,7 +49,7 @@ SOFILE = libvdr-$(PLUGIN).so
 
 INCLUDES += $(shell taglib-config --cflags)
 
-DEFINES += -DPLUGIN_NAME_I18N='"$(PLUGIN)"' -DTIXML_USE_STL
+DEFINES += -DPLUGIN_NAME_I18N='"$(PLUGIN)"' -D__STDC_CONSTANT_MACROS -DTIXML_USE_STL
 
 LIBS = $(shell taglib-config --libs) -ltinyxml
 
