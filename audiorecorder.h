@@ -15,7 +15,7 @@
 
 class cPluginAudiorecorder : public cPlugin {
 private:
-	cDispatcher *dispatcher;
+        cDispatcher *dispatcher;
         cPostproc *postproc;
 
         static const char *DESCRIPTION;
@@ -43,7 +43,7 @@ public:
         virtual void Housekeeping(void);
         virtual const char *MainMenuEntry(void);
         virtual cOsdObject *MainMenuAction(void);
-	virtual cString Active(void);
+        virtual cString Active(void);
         virtual cMenuSetupPage *SetupMenu(void);
         virtual bool SetupParse(const char *name, const char *value);
         virtual bool Service(const char *id, void *data = NULL);

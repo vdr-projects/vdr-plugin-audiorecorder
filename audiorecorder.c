@@ -20,8 +20,12 @@
 
 #include <iostream>
 
+#if defined(APIVERSNUM) && APIVERSNUM < 20000
+#error "VDR-2.0.0 API version or greater is required!"
+#endif
+
 extern "C" {
-        #include <avcodec.h>
+#include <libavcodec/avcodec.h>
 }
 
 // extern cChannels Channels;
@@ -174,7 +178,9 @@ bool cPluginAudiorecorder::Initialize(void)
 bool cPluginAudiorecorder::Start(void)
 {
         /* initialize libavcodec */
+#if LIBAVCODEC_VERSION_MAJOR < 54
         avcodec_init();
+#endif
         avcodec_register_all();
 
         probe_audio_codecs();

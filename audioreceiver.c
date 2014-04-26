@@ -9,16 +9,19 @@
 
 /* --- cAudioReceiver ------------------------------------------------------- */
 
-cAudioReceiver::cAudioReceiver(const cChannel *_channel)
-:cReceiver(_channel->GetChannelID(), -2, _channel->Apid(0)), cThread()
+cAudioReceiver::cAudioReceiver(const cChannel* _channel)
+:cReceiver(_channel, -2), cThread("audiorecorder-receiver")
 {
+        SetPids(NULL);
+        AddPid(_channel->Apid(0));
+
         channel = _channel;
 
         active = false;
 
         pes_sync = false;
-	device_number = -1;
-	recstat = recWait;
+        device_number = -1;
+        recstat = recWait;
 
         buffer = NULL;
         rds = NULL;
@@ -32,7 +35,7 @@ cAudioReceiver::cAudioReceiver(const cChannel *_channel)
 
 cAudioReceiver::~cAudioReceiver(void)
 {
-	Activate(false);
+        Activate(false);
 
         DELETE(buffer);
         DELETE(rds);
@@ -146,7 +149,7 @@ void cAudioReceiver::Action(void)
         }
 
 
-	pes_sync = false;
+        pes_sync = false;
         device_number = -1;
         recstat = recWait;
 
@@ -165,8 +168,8 @@ bool cAudioReceiver::is_attached(int attached_device_number)
                 return false;
 
         if (attached_device_number != device_number &&
-	    attached_device_number != -1)
-		return false;
+        attached_device_number != -1)
+        return false;
 
         return true;
 }

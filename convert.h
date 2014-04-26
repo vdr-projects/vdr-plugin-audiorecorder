@@ -10,7 +10,8 @@
 #include "a-tools.h"
 
 extern "C" {
-#include <avcodec.h>
+#include <libavcodec/avcodec.h>
+#include <libavutil/mem.h>
 }
 
 
@@ -19,9 +20,9 @@ private:
         AVCodec *decoder_codec, *encoder_codec;
         AVCodecContext *decoder_ctx, *encoder_ctx;
         int decoder_open, encoder_open;
-        
+
         abuffer decoder_buf, encoder_buf, mpa_frame_buf;
-        
+
         void init_decoder(void);
         void decode_mpa_frame(mpeg_audio_frame *mpa_frame);
         void init_encoder(const char *codec, int bit_rate, int sample_rate,
@@ -29,7 +30,7 @@ private:
 public:
         cConvert(const cPostData &postdata);
         ~cConvert();
-        
+
         abuffer *reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
                 float volume = 1);
 };

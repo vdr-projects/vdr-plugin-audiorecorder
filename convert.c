@@ -51,8 +51,8 @@ void  cConvert::init_decoder(void)
                 return;
         }
 
-        decoder_ctx = avcodec_alloc_context();
-        decoder_open = avcodec_open(decoder_ctx, decoder_codec);
+        decoder_ctx = avcodec_alloc_context3(NULL);
+        decoder_open = avcodec_open2(decoder_ctx, decoder_codec, 0);
 
         if (decoder_open < 0) {
                 dsyslog("[audiorecorder]: could not open codec mp2 (%s, "
@@ -77,7 +77,7 @@ void cConvert::init_encoder(const char *codec, int bit_rate, int sample_rate,
                 return;
         }
 
-        encoder_ctx = avcodec_alloc_context();
+        encoder_ctx = avcodec_alloc_context3(NULL);
 
         encoder_ctx->bit_rate = bit_rate;
         encoder_ctx->sample_rate = sample_rate;
@@ -111,9 +111,13 @@ void cConvert::decode_mpa_frame(mpeg_audio_frame *mpa_frame)
         avcodec_decode_audio(decoder_ctx, (short *)decoder_buf.data,
                 &decoder_buf.length, mpa_frame->data, mpa_frame->length);
 #else
+        AVPacket avpkt;
+        av_init_packet(&avpkt);
+        avpkt.data = mpa_frame->data;
+        avpkt.size = mpa_frame->length;
         decoder_buf.length = AVCODEC_MAX_AUDIO_FRAME_SIZE;
-        avcodec_decode_audio2(decoder_ctx, (short *)decoder_buf.data,
-                &decoder_buf.length, mpa_frame->data, mpa_frame->length);
+        int len = avcodec_decode_audio3(decoder_ctx, (short *)decoder_buf.data,
+                &decoder_buf.length, &avpkt);
 #endif
 }
 
