@@ -13,8 +13,6 @@
 
 #include <string>
 
-#include "audiorecorder_i18n.h"
-
 
 class cMainmenu : public cOsdMenu {
 private:

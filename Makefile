@@ -74,7 +74,7 @@ endif
 
 ### The object files (add further files here):
 
-OBJS = $(PLUGIN).o mainmenu.o browse.o browse-item.o column.o dispatcher.o audioreceiver.o postdata.o trackinfo.o postproc.o rds.o convert.o cache.o xml-cache.o xml-base.o setup.o mpa-frame.o audiorecorder_i18n.o
+OBJS = $(PLUGIN).o mainmenu.o browse.o browse-item.o column.o dispatcher.o audioreceiver.o postdata.o trackinfo.o postproc.o rds.o convert.o cache.o xml-cache.o xml-base.o setup.o mpa-frame.o
 
 ### The main target:
 

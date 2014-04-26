@@ -145,8 +145,6 @@ bool cPluginAudiorecorder::Initialize(void)
         cfg.append(strdup(ConfigDirectory(PLUGIN_NAME_I18N)));
         cfg.append("/audiorecorder.conf");
 
-        RegisterI18n(Phrases);
-
         audio_codecs[0]   = "mp2";
         audio_codecs[1]   = "libmp3lame";
         audio_codecs[2]   = "mp3";

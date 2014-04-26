@@ -13,8 +13,6 @@
 #include <sstream>
 #include <string>
 
-#include "audiorecorder_i18n.h"
-
 class cPluginAudiorecorder : public cPlugin {
 private:
 	cDispatcher *dispatcher;
