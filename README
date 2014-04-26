@@ -1,0 +1,58 @@
+This is a "plugin" for the Video Disk Recorder (VDR).
+
+Written by:                  herbert attenberger <herbsl at a-land.de>
+
+Project's homepage:          <http://www.a-land.de>
+
+Latest version available at: <http://www.a-land.de>
+
+See the file COPYING for license information.
+
+Description:
+Floods your disc with music! This plugin records songs with artist, title and ID3-Tag. The naming and cutting of the songs uses the "Radiotext plus" feature of the ARD channels "DAS MODUL", Eins_Live, YOU_FM, WDR_2, SWR3 etc., as long as the vdr is tuned to the transponder or if there is a unused DVB-card.
+
+As codec you can choose between the native format mp2 MPEG-1_Audio_Layer_2 and mp3 (mit adjustable bitrate). More codecs are planned for the future.
+
+Additionally you can add a fade-in and/or fade-out effect, to reduce unwanted noises at the beginning or the end of the song.
+
+TODO: Add other recording mechanisms, e.g. PayRadio channels with title/artist in the EPG as Premiere, DMX, .... 
+
+Parameters:
+-r dir,   --recdir=dir    set recording-directory to 'dir'.
+-d level, --debug=level   set debugging level (default: 0),
+                          all stuff is written to stdout.
+                          0 = off
+                          1 = only errors
+                          2 = errors and further infos
+
++ Patches to the original plugin
+
+Written by:                  magicamun
+
+Description:
+Additions to the original plugin are:
+
+- adjustable setup for "UpperCase" or not in the naming of the song.
+- 3 possible namings of songs introduced, subdirectories are possible too.
+- adjustable number of copies of songs on disk.
+- config file "audiorecorder.conf" in the plugin-directory of your vdr added, to setup the used channels.
+- multilanguage support (at the moment only english and german)
+- Reading of the xml-cache reprogrammed as a thread - to speed up the start of the VDR.
+- optional naming of the songs via external script.
+- relative pathes in the xml-cache.
+
+Parameters:
+-r dir,   --recdir=dir    set recording-directory to 'dir'.
+-d level, --debug=level   set debugging level (default: 0),
+                          all stuff is written to stdout.
+                          0 = off
+                          1 = only errors
+                          2 = errors and further infos
+-p script, --postproc=script set script (default: none)
+                          for postprocessing.
+
+Installation:
+Additional to the installation hints of the pre5, copy the "audiorecorder.conf" in the plugin-directory of your VDR.
+
+Others:
+Other recording mechanism via title/artist in the EPG for Premiere programmed by Frankman (search for P-Rex)

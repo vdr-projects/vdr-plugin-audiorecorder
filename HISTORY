@@ -1,0 +1,90 @@
+VDR Plugin 'audiorecorder' Revision History
+-------------------------------------------
+
+2006-06-16: Version 0.1.0-pre1
+
+- Initial revision.
+
+2006-06-26: Version 0.1.0-pre2
+
+- replaced localtime with thread-safe localtime_r (cAudioreceiver::get_path()).
+- try to catch wrong rtp-tags (cRds::correct_rtp_tags()).
+- add support for reencoding into mp3 format.
+
+2006-06-26: Version 0.1.0-pre3
+
+- a small bugfix in cRds::decode_rtp().
+
+2006-07-17: Version 0.1.0-pre4
+
+- complete rewrite of the recording stuff. now there are up to !!! 12 !!!
+  parallel recordings possible (cDispatcher()).
+- better/more checks of the rtp_tags (cRds::correct_rtp_tag()).
+- fixed a bug in cRds::set_next_frame().
+- some cosmetic changes.
+- introduced service-interface for communication with other plugins
+  (you can use the header file service.h).
+- reduced the verbosity of the plugin. debugging could be enabled on stdout with
+  the commandline argument -d or --debug=.
+
+2006-09-01: Version 0.1.0-pre5
+
+- added casts to uint64_t to avoid an integer overflow (suggested by egal &
+  lordjaxom on www.vdrportal.de, cDispatcher::check_free_disc_space()).
+- added "min. free disc space (in mb)" to setup menu. the recording is stopped
+  if the free space on the recording-directory is smaller than this value
+  (suggested by egal on www.vdrportal.de).
+- added "max. tracks in queue" to setup menu. the recording is stopped if this
+  value is achived. recording is startet again at 25 % of this value
+  (suggested by egal on www.vdrportal.de).
+- now artist and title are converted to capital letters (for better detecting
+  of doubled recordings).
+- after switching a channel, the next receiver is attached after at minimum
+  30 seconds (thx to andipiel from www.vdrportal.de, cDispatcher()).
+- removed track.c and track.h
+- introduced caching (xml-base.[c,h], xml-cache.[c,h] and cache.[c,h]).
+  tinyxml is used for the xml-handling, so thx a lot to the authors ...
+  ... look at http://www.grinninglizard.com/tinyxml/ for more informations.
+- introduced menu and browser (menu.[c,h], browse[c,h], browse-item[c,h])
+- code cleanup, replaced most c-functions with the according c++/stl function.
+- add "pause if osd is open" to setup menu.
+- moved hr3, hr1 and swr3 to the end of the channels-list (dispatcher.c)
+- added possible album, track or year-values (trackinfo.h)
+
+2006-09-05: Version 0.1.0-pre6
+
+- fixed a possible crash in cXmlCache::copy_to_objects()
+- added the namespace "a-land" to tinyxml to avoid a segfault when used together
+  with the setup plugin/path
+
++HISTORY.magicamun
+
+2007-03-08: Version 0.1.0-pre6a
+
+- adjustable setup for "UpperCase" or not in the naming of the song.
+- 3 possible namings of songs introduced, subdirectories are possible too.
+- adjustable number of copies of songs on disk.
+- preparation for setting of channels via name/provider.
+
+2007-03-25: Version 0.1.0-pre6b
+- config file "audiorecorder.conf" in the plugin-directory of your
+  VDR added, to setup the used channels.
+
+2007-03-25: Version 0.1.0-pre6c
+- multilanguage support (at the moment only english and german)
+- Adjusting/correcting the cache-functions to allow subdirectories
+- Reading of the xml-cache reprogrammed as a thread - to speed up
+  the start of the VDR.
+
+2007-05-26: Version 0.1.0-pre7 (for 1.4.x)
+2007-05-26: Version 0.1.0-pre8 (für 1.5.x)
+- optional naming of the songs via external script.
+
+2007-06-08: Version 0.1.0-pre9
+- the plugin is now acting better if the audiorecorder.conf is missing.
+- caches only the defined codecs (mp2, mp3).
+- relative pathes in the xml-cache.
+- crash fixed in the script post processing if there is no string returned.
+- channel (#5) and event (#6) added to the parameter list of the
+  external script, bitrates are now given correctly.
+

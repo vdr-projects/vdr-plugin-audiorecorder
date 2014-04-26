@@ -1,0 +1,240 @@
+# VDR plugin language source file.
+# Copyright (C) 2007 Klaus Schmidinger <kls@cadsoft.de>
+# This file is distributed under the same license as the VDR plugin package.
+# Klaus Schmidinger <kls@cadsoft.de>, 2000
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vdr-audiorecorder-2.0.0\n"
+"Report-Msgid-Bugs-To: <cwieninger@gmx.de>\n"
+"POT-Creation-Date: 2009-03-09 19:14+0100\n"
+"PO-Revision-Date: 2007-08-19 08:20+0200\n"
+"Last-Translator: Joerg Bornkessel <hd_brummy@gentoo.org>\n"
+"Language-Team: <vdr@linuxtv.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "floods your disc with music"
+msgstr ""
+
+msgid "mp2"
+msgstr "mp2"
+
+msgid "mp3"
+msgstr "mp3"
+
+msgid "off"
+msgstr "aus"
+
+msgid "linear"
+msgstr "linear"
+
+msgid "exponential"
+msgstr "exponentiell"
+
+msgid "all"
+msgstr "alle"
+
+msgid "by artist"
+msgstr "nach Künstler"
+
+msgid "by channel"
+msgstr "nach Kanal"
+
+msgid "by date"
+msgstr "nach Datum"
+
+msgid "Artist/Title"
+msgstr "Künstler/Titel"
+
+msgid "Artist - Title"
+msgstr "Künstler - Titel"
+
+msgid "Channel/Artist/Title"
+msgstr "Kanal/Künstler/Titel"
+
+msgid "Channel - Artist - Title"
+msgstr "Kanal - Künstler - Titel"
+
+msgid "Audiorecorder"
+msgstr "Audiorecorder"
+
+msgid "on"
+msgstr "an"
+
+msgid "collapse all"
+msgstr "Alles zuklappen"
+
+msgid "expand all"
+msgstr "Alles aufklappen"
+
+msgid "action"
+msgstr "Aktion"
+
+msgid "Browse tracks"
+msgstr "Titel durchsuchen"
+
+msgid "unknown"
+msgstr "unbekannt"
+
+msgid "No external player-plugin found"
+msgstr "Kein externes Player-Plugin gefunden"
+
+msgid "Playing all tracks in "
+msgstr "Alle Titel spielen in "
+
+msgid "Playing "
+msgstr "Spielt "
+
+msgid "Audiorecorder, Action"
+msgstr "Audiorecorder, Aktion"
+
+msgid "Category : "
+msgstr "Kategorie : "
+
+msgid "Play all tracks"
+msgstr "Alle Titel spielen"
+
+msgid "More to come ..."
+msgstr "Es kommt noch mehr ..."
+
+msgid "Track: "
+msgstr "Titel: "
+
+msgid "Play track"
+msgstr "Titel spielen"
+
+msgid "back"
+msgstr "zurück"
+
+msgid "Audiorecorder, Info"
+msgstr "Audiorecorder, Info"
+
+msgid "File"
+msgstr "Datei"
+
+msgid "Artist"
+msgstr "Künstler"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Album"
+msgstr "Album"
+
+msgid "Genre"
+msgstr "Genre"
+
+msgid "Track"
+msgstr "Titel"
+
+msgid "Year"
+msgstr "Jahr"
+
+msgid "Channel"
+msgstr "Kanal"
+
+msgid "Event"
+msgstr "Ereignis"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Time"
+msgstr "Uhrzeit"
+
+msgid "Audiorecorder: rebuilding cache finished"
+msgstr "Audiorecorder: Cache Neuaufbau fertig"
+
+msgid "Audiorecorder: loading of cache finished"
+msgstr "Audiorecorder: Cache-Laden fertig"
+
+msgid "Audiorecorder: No Channels defined !"
+msgstr "Audiorecorder: Keine Kanäle definiert !"
+
+msgid "Start receiving"
+msgstr "Aufnahmemodus starten"
+
+msgid "Stop receiving"
+msgstr "Aufnahmemodus beenden"
+
+msgid "Start rebuilding cache"
+msgstr "Cache neu aufbauen"
+
+msgid "Rebuilding cache, try later"
+msgstr "Cache wird neu aufgebaut - später nocheinmal versuchen"
+
+msgid "no channel in %s"
+msgstr "Kein Kanal in %s"
+
+msgid "Rebuilding cache"
+msgstr "Cache wird neu aufgebaut"
+
+#, fuzzy
+msgid "Channel/Artist - Title"
+msgstr "Kanal/K�nstler - Titel"
+
+msgid "External"
+msgstr "Extern"
+
+msgid "--- Receiver: ---"
+msgstr "--- Aufnahme: ---"
+
+msgid "Receiving mode on start"
+msgstr "Aufnahmemodus beim Start"
+
+msgid "Max. number of receivers"
+msgstr "Max. Anzahl paralleler Aufnahmen"
+
+msgid "Min. free disc space (in mb)"
+msgstr "Min. freier Plattenplatz (in MB)"
+
+msgid "--- Browser: ---"
+msgstr "--- Browser: ---"
+
+msgid "Default view"
+msgstr "Default Anzeige"
+
+msgid "--- Postprocessing: ---"
+msgstr "--- Nachbearbeitung: ---"
+
+msgid "Pause if osd is opened"
+msgstr "Pausieren wenn OSD offen ist"
+
+msgid "Max. tracks in queue"
+msgstr "Max. Titel in Queue"
+
+msgid "Fade in mode"
+msgstr "Fade-In Modus"
+
+msgid "Fade in seconds"
+msgstr "Fade-In Sekunden"
+
+msgid "Fade out mode"
+msgstr "Fade-Out Modus"
+
+msgid "Fade out seconds"
+msgstr "Fade-Out Sekunden"
+
+msgid "Audio codec"
+msgstr "Audiokodierung"
+
+msgid "Bitrate (if audio codec isn't <original>)"
+msgstr "Bitrate (wenn Audiokodierung nicht original ist)"
+
+msgid "File Pattern"
+msgstr "Dateimuster"
+
+msgid "Upper Case"
+msgstr "Großschreibung"
+
+msgid "No"
+msgstr "Nein"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "Copies"
+msgstr "Kopien"

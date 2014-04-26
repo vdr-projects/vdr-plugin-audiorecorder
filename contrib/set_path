@@ -1,0 +1,35 @@
+#! /bin/bash
+
+# To active this script, call the audiorecorder-plugin with the
+# parameter -p plus the full path to this script, e.g.
+# "-p /audio/set_path" if this script is stored in the /audio
+# directory, it does not have to be in /usr/bin. Further you have
+# to configure the plugin to use "extern" for the file names.
+
+# The parameters to ths script are
+# $1. source file
+#     (e.g. "/audio/S19.2E-1-1093-28450-2007-04-13.16.15.37.tmp.mp2")
+# $2. bitrate of the source file
+# $3. artist
+# $4. title
+# $5. channel
+# $6. event
+# $7. used codec (e.g. "mp3")
+# $8. set bitrate of the target
+
+# The output of the script has to be the file name of the target
+# file. If the file already exists or if there is no output of
+# this script, the audiorecorder plugin does not convert the recording
+# but deletes it.
+
+# In this sample file, the file name of the target file is made
+# of "<artist>_-_<title>.<codec>". Additionally all characters are
+# translated from upper to lower case as well as '/' translated to
+# ',' and '*', '?' resp. ' ' to '_'.
+
+# You can do anything in this script: handle special characters,
+# double underscores, etc. Test wether a song is already stored on CDs,
+# use a blacklist for miserable artists, store multiple versions of
+# recordings, ... Have a look at postproc.pl.
+
+echo -n "$3_-_$4.$7" | tr '[A-Z]/*? ' '[a-z],___'
