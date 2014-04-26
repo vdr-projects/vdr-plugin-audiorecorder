@@ -172,10 +172,6 @@ msgstr "Kein Kanal in %s"
 msgid "Rebuilding cache"
 msgstr "Cache wird neu aufgebaut"
 
-#, fuzzy
-msgid "Channel/Artist - Title"
-msgstr "Kanal/Künstler - Titel"
-
 msgid "External"
 msgstr "Extern"
 
