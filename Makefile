@@ -23,6 +23,9 @@ PLGCFG = $(call PKGCFG,plgcfg)
 #
 TMPDIR ?= /tmp
 
+# backup for broken libavcodec pkg-config
+FFMDIR ?= /usr/include
+
 ### The compiler options:
 
 export CFLAGS   = $(call PKGCFG,cflags)
@@ -60,7 +63,7 @@ endif
 # ffmpeg
 AVCODEC_INC = $(shell pkg-config libavcodec --cflags | sed -e 's/  //g')
 ifeq ($(strip $(AVCODEC_INC)),)
-    INCLUDES += -I$(FFMDIR) -I$(FFMDIR)/libavcodec
+    INCLUDES += -I$(FFMDIR)/libavcodec
 else
     INCLUDES += $(AVCODEC_INC)
 endif
