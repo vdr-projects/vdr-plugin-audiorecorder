@@ -69,7 +69,7 @@ protected:
         virtual void Activate(bool on);
         virtual void Action(void);
 
-        virtual void ChannelSwitch(const cDevice *device, int channel_number);
+        virtual void ChannelSwitch(const cDevice *device, int channel_number, bool LiveView);
 public:
 	cDispatcher(void);
 	~cDispatcher();

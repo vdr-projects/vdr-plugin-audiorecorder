@@ -152,7 +152,7 @@ void cDispatcher::Action(void)
 }
 
 
-void cDispatcher::ChannelSwitch(const cDevice *device, int channel_number)
+void cDispatcher::ChannelSwitch(const cDevice *device, int channel_number, bool LiveView)
 {
 	/*
 	 * workaround to detach active audioreceivers if the attached device
