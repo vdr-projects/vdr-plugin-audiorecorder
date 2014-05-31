@@ -6,6 +6,9 @@
 
 #include <vdr/tools.h>
 
+#ifndef AVCODEC_MAX_AUDIO_FRAME_SIZE
+#define AVCODEC_MAX_AUDIO_FRAME_SIZE 192000 // 1 second of 48khz 32bit audio
+#endif
 
 /* --- cConvert ------------------------------------------------------------- */
 
@@ -52,7 +55,7 @@ void  cConvert::init_decoder(void)
         }
 
         decoder_ctx = avcodec_alloc_context3(NULL);
-        decoder_open = avcodec_open2(decoder_ctx, decoder_codec, 0);
+        decoder_open = avcodec_open2(decoder_ctx, decoder_codec, NULL);
 
         if (decoder_open < 0) {
                 dsyslog("[audiorecorder]: could not open codec mp2 (%s, "
@@ -83,7 +86,7 @@ void cConvert::init_encoder(const char *codec, int bit_rate, int sample_rate,
         encoder_ctx->sample_rate = sample_rate;
         encoder_ctx->channels = channels;
 
-        encoder_open = avcodec_open(encoder_ctx, encoder_codec);
+        encoder_open = avcodec_open2(encoder_ctx, encoder_codec, NULL);
 
         if (encoder_open < 0) {
                 dsyslog("[audiorecorder]: could not open codec %s (%s, %s())", codec, __FILE__, __func__);
