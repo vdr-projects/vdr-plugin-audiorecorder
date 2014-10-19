@@ -19,7 +19,7 @@
 class cXmlCache: public cXmlBase {
 private:
         void rebuild_track(const std::string &path, const char *date,
-		const char *time);
+        const char *time);
 protected:
         virtual void copy_to_objects(void);
 public:

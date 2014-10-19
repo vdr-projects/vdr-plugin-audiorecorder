@@ -88,3 +88,16 @@ VDR Plugin 'audiorecorder' Revision History
 - channel (#5) and event (#6) added to the parameter list of the
   external script, bitrates are now given correctly.
 
+2014-04-19:
+- moved to http://projects.vdr-developer.org/
+- new Projectmanager Joerg Bornkessel <hd_brummy at gento.org>
+
+2014-05-05: Version 2.0.0_rc2
+- new Makefile, up from vdr-2.0 (support for old Makefile handling droped)
+- unbundle included tinyxml code, using the shared lib from tinyxml (with stl)
+- droped obsolete i18n language handling
+- several fixex for ffmpeg/libav-9
+
+2014-05-31: Version 2.0.0_rc3
+- #bug 1846, missing parameter LiveView added
+- compile fixed with ffmpeg-2

@@ -26,14 +26,14 @@ void cTrackInfo::clear(void)
 {
         recpath.erase();
         path.erase();
-	artist.erase();
-	title.erase();
-	album.erase();
+        artist.erase();
+        title.erase();
+        album.erase();
         track = 0;
         year = 0;
-	genre.erase();
-	comment.erase();
-	event.erase();
+        genre.erase();
+        comment.erase();
+        event.erase();
         recdate.erase();
         rectime.erase();
         codec = 0;
@@ -126,7 +126,7 @@ void cTrackInfo::set_date(const char *_date)
         if (! _date || ! recdate.empty())
                 return;
 
-	recdate = _date;
+    recdate = _date;
 
         if (cPluginAudiorecorder::get_dbg_level() > 1)
                 cout << "--- date set to: " << recdate << " ---" << endl;
@@ -138,7 +138,7 @@ void cTrackInfo::set_time(const char *_time)
         if (! _time || ! rectime.empty())
                 return;
 
-	rectime = _time;
+    rectime = _time;
 
         if (cPluginAudiorecorder::get_dbg_level() > 1)
                 cout << "--- time set to: " << rectime << " ---" << endl;

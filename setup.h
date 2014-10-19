@@ -9,11 +9,11 @@
 
 
 struct setup_values {
-	int start_type;
+    int start_type;
         int max_receivers;
         int min_free_space;
 
-	int default_view;
+    int default_view;
 
         int pause;
         int max_postproc;

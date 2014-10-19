@@ -8,10 +8,10 @@
 
 /* default setup values: */
 struct setup_values SetupValues = {
-	1,  /* receiving mode on start is 'on' */
+    1,  /* receiving mode on start is 'on' */
         5,  /* max. receivers */
         50, /* min. free space (in mb) */
-	3,  /* default view 'by date' */
+    3,  /* default view 'by date' */
         1,  /* pause postprocessing if osd is opened */
         8,  /* max. tracks in postprocessing queue */
         1,  /* fade in mode */

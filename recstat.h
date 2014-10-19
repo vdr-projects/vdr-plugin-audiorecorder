@@ -11,7 +11,7 @@ enum eRecStat {
         recOff,         /* no active recording */
         recStart,       /* start recording */
         recRun,         /* active recording */
-        recStop,        /* stop recording */        
+        recStop,        /* stop recording */
 };
 
 #endif /* __RECSTAT_H */

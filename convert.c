@@ -73,6 +73,7 @@ void  cConvert::init_decoder(void)
 void cConvert::init_encoder(const char *codec, int bit_rate, int sample_rate,
         int channels)
 {
+        avcodec_register_all();
         encoder_codec = avcodec_find_encoder_by_name(codec);
         if (! encoder_codec) {
                 dsyslog("[audiorecorder]: codec %s is not supported (%s, "
@@ -85,6 +86,7 @@ void cConvert::init_encoder(const char *codec, int bit_rate, int sample_rate,
         encoder_ctx->bit_rate = bit_rate;
         encoder_ctx->sample_rate = sample_rate;
         encoder_ctx->channels = channels;
+        encoder_ctx->sample_fmt = AV_SAMPLE_FMT_S16; //vdrportal.de #post1214719
 
         encoder_open = avcodec_open2(encoder_ctx, encoder_codec, NULL);
 
@@ -110,10 +112,7 @@ void cConvert::decode_mpa_frame(mpeg_audio_frame *mpa_frame)
                 return;
         }
 
-#if LIBAVCODEC_VERSION_INT < ((52<<16)+(0<<8)+0)
-        avcodec_decode_audio(decoder_ctx, (short *)decoder_buf.data,
-                &decoder_buf.length, mpa_frame->data, mpa_frame->length);
-#else
+// ToDo: convert to use avcodec_decode_audio4
         AVPacket avpkt;
         av_init_packet(&avpkt);
         avpkt.data = mpa_frame->data;
@@ -121,7 +120,6 @@ void cConvert::decode_mpa_frame(mpeg_audio_frame *mpa_frame)
         decoder_buf.length = AVCODEC_MAX_AUDIO_FRAME_SIZE;
         int len = avcodec_decode_audio3(decoder_ctx, (short *)decoder_buf.data,
                 &decoder_buf.length, &avpkt);
-#endif
 }
 
 
@@ -153,6 +151,7 @@ abuffer *cConvert::reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
                 }
         }
 
+// ToDo: avcodec_encode_audio is deprecated,..
         encoder_buf.offset = avcodec_encode_audio(encoder_ctx, encoder_buf.data,
                 encoder_buf.length, (short *)decoder_buf.data);
         /* encoder_buf.offset is used to save the size of the encoded frame */

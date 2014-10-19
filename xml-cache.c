@@ -47,7 +47,7 @@ void cXmlCache::ReadDir(int level, std::string path)
                 file = result->d_name;
 
                 int len = file.length() - 8;
-		if (len < 0)
+        if (len < 0)
                         len = 0;
 
                 if (file == "." || file == ".." ||
@@ -235,8 +235,8 @@ void cXmlCache::rebuild_track(const string &path, const char *date,
         cTrackInfo trackinfo;
 
         trackinfo.set_path(path);
-	trackinfo.set_date(date);
-	trackinfo.set_time(time);
+        trackinfo.set_date(date);
+        trackinfo.set_time(time);
 
         if (! tag->artist().isEmpty())
                 trackinfo.set_artist(tag->artist().toCString());
@@ -259,8 +259,8 @@ void cXmlCache::rebuild_track(const string &path, const char *date,
         if (! tag->comment().isEmpty()) {
                 string com = tag->comment().toCString();
                 trackinfo.set_comment(com.c_str());
-		string::size_type f1 = com.find("recorded on \"");
-		string::size_type f2 = com.find("(vdr-audiorecorder ");
+        string::size_type f1 = com.find("recorded on \"");
+        string::size_type f2 = com.find("(vdr-audiorecorder ");
                 if (f1 != string::npos && f2 != string::npos) {
                 	com.erase(0, 13);
                 	string::size_type p1 = com.find_last_of('@');
@@ -271,7 +271,7 @@ void cXmlCache::rebuild_track(const string &path, const char *date,
                                         trackinfo.set_channel(com.substr(p1 + 1,
                                                         p2 - p1 - 1));
                         }
-		}
+        }
         }
 
         Cache.add_track(trackinfo, false);

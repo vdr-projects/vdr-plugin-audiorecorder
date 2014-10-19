@@ -40,9 +40,9 @@ private:
         bool lb0xfd;
         int last_tb, last_rb;
         eRecStat recstat;
-        
+
         cPostData *postdata;
-        
+
         void decode_radiotext(void);
         void decode_rtp(void);
         void decode_rtp_items(void);
@@ -51,7 +51,7 @@ private:
 public:
         cRds(cPostData *_postdata);
         ~cRds();
-        
+
         void put_data(uchar *data, int length);
         bool set_next_frame(void);
         eRecStat decode_frame(void);

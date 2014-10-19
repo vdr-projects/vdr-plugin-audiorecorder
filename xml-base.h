@@ -17,11 +17,11 @@ private:
         TiXmlDocument *document;
         TiXmlElement *root;
 protected:
-	virtual ~cXmlBase();
+        virtual ~cXmlBase();
 
         virtual void copy_to_objects(void) {}
 public:
-	cXmlBase(const char *_root_element);
+     cXmlBase(const char *_root_element);
 
         bool load(const std::string &_path);
         void clear(void);

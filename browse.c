@@ -26,11 +26,11 @@ using namespace std;
 cBrowse::cBrowse(void)
 :cOsdMenu("")
 {
-	num_columns = MAXCOLS;
-	columns = NULL;
-	columns = new cColumn[num_columns + 1];
+    num_columns = MAXCOLS;
+    columns = NULL;
+    columns = new cColumn[num_columns + 1];
 
-	player = cPluginManager::CallFirstService(SERVICE);
+    player = cPluginManager::CallFirstService(SERVICE);
 
         string skin = Skins.Current()->Name();
         width = DisplayMenu()->EditableWidth();
@@ -38,7 +38,7 @@ cBrowse::cBrowse(void)
         if (skin != "curses")
                 width /= 12;
 
-	dsyslog("[audiorecorder]: skin %s (width %d) detected (%s, %s())",
+    dsyslog("[audiorecorder]: skin %s (width %d) detected (%s, %s())",
                 skin.c_str(), width, __FILE__, __func__);
 
         set_view(SetupValues.default_view);
@@ -47,31 +47,31 @@ cBrowse::cBrowse(void)
 
 cBrowse::~cBrowse()
 {
-	delete[] columns;
+    delete[] columns;
 }
 
 
 eOSState cBrowse::ProcessKey(eKeys key)
 {
-	eOSState state = cOsdMenu::ProcessKey(key);
+    eOSState state = cOsdMenu::ProcessKey(key);
 
         if (HasSubMenu()) {
-		process_submenu_states(state);
+        process_submenu_states(state);
 
                 if (state == osBack || key == kBlue || key == kOk)
                         CloseSubMenu();
 
-		return osContinue;
+        return osContinue;
         }
 
         set_status();
         set_help_keys();
 
-	cBrowseItem *item = get_actual_item();
+    cBrowseItem *item = get_actual_item();
 
-	switch (key) {
+    switch (key) {
         case kRed:
-		if (! item)
+            if (! item)
                         break;
 
                 if (item->is_node())
@@ -82,26 +82,26 @@ eOSState cBrowse::ProcessKey(eKeys key)
                                         get_trackname(item->get_track())));
 
                 break;
-	case kGreen:
-		if (help_green.empty())
-			break;
+    case kGreen:
+        if (help_green.empty())
+            break;
 
-		expand ? expand = false : expand = true;
-		set_view(view, false);
+        expand ? expand = false : expand = true;
+        set_view(view, false);
 
-		break;
+        break;
         case kYellow:
                 set_view(++view);
 
                 break;
-	case kBlue:
+    case kBlue:
                 if (item && ! item->is_node())
                         AddSubMenu(new cBrowseInfo(item->get_track()));
 
                 break;
-	case kOk:
-		if (! item)
-			break;
+    case kOk:
+        if (! item)
+            break;
 
                 if (! item->is_node())
                         play_file(item->get_track());
@@ -109,16 +109,16 @@ eOSState cBrowse::ProcessKey(eKeys key)
                         item->toggle_node();
                         insert_items();
                 }
-		else {
+        else {
                         item->toggle_node();
                         delete_items();
                 }
-		break;
-	default:
-		break;
-	}
+        break;
+        default:
+        break;
+     }
 
-	return state;
+    return state;
 }
 
 
@@ -134,8 +134,8 @@ void cBrowse::set_view(int _view, bool init)
                 columns[1].set(colTitle, width - TAB_LEN);
                 columns[2].set(colEnd);
 
-		if (init)
-			expand = false;
+        if (init)
+            expand = false;
 
                 help_yellow = views[2];
         }
@@ -148,8 +148,8 @@ void cBrowse::set_view(int _view, bool init)
                 columns[2].set(colArtistTitle, width - 2 * TAB_LEN);
                 columns[3].set(colEnd);
 
-		if (init)
-			expand = false;
+        if (init)
+            expand = false;
 
                 help_yellow = views[3];
         }
@@ -163,8 +163,8 @@ void cBrowse::set_view(int _view, bool init)
                 columns[3].set(colArtistTitle, width - TAB_LEN - 17);
                 columns[4].set(colEnd);
 
-		if (init)
-			expand = true;
+        if (init)
+            expand = true;
 
                 help_yellow = views[0];
         }
@@ -176,43 +176,43 @@ void cBrowse::set_view(int _view, bool init)
                 columns[0].set(colArtistTitle, width);
                 columns[1].set(colEnd);
 
-		if (init)
-			expand = true;
+        if (init)
+            expand = true;
 
                 help_yellow = views[1];
         }
 
-	if (init) {
-		SetCols(columns[0].get_width(), columns[1].get_width(),
-			columns[2].get_width(), columns[3].get_width(),
-			columns[4].get_width());
+     if (init) {
+         SetCols(columns[0].get_width(), columns[1].get_width(),
+            columns[2].get_width(), columns[3].get_width(),
+            columns[4].get_width());
 
-        	Cache.sort(columns);
-	}
+            Cache.sort(columns);
+    }
 
         Clear();
         insert_items();
 
         set_status();
-	set_help_keys();
+        set_help_keys();
         set_title();
 }
 
 
 void cBrowse::set_help_keys(void)
 {
-	/* green key */
-	if (view == 0)
-		help_green.erase();
-	else if (expand)
+    /* green key */
+    if (view == 0)
+        help_green.erase();
+    else if (expand)
                 help_green = tr("collapse all");
-	else
+    else
                 help_green = tr("expand all");
 
         cBrowseItem *item = get_actual_item();
 
         SetHelp(tr("action"), (help_green.empty() ? NULL : help_green.c_str()) ,
-		help_yellow, (item && ! item->is_node() ? "info" : NULL));
+     help_yellow, (item && ! item->is_node() ? "info" : NULL));
 }
 
 
@@ -222,17 +222,17 @@ void cBrowse::set_status(void)
         if (strcmp(Skins.Current()->Name(), "sttng") == 0)
                 return;
 
-	string status(views[view]);
+    string status(views[view]);
 
-	cBrowseItem *item = get_actual_item();
+    cBrowseItem *item = get_actual_item();
 
-	if (item && item->get_main_item()) {
+    if (item && item->get_main_item()) {
                 status.append(" ");
-		status.append(get_category(item));
+        status.append(get_category(item));
         }
 
         cut_string(status, width);
-	SetStatus(status.c_str());
+    SetStatus(status.c_str());
 }
 
 
@@ -248,33 +248,33 @@ void cBrowse::set_title(void)
 
 void cBrowse::process_submenu_states(eOSState &state)
 {
-	cBrowseItem *item = get_actual_item();
+    cBrowseItem *item = get_actual_item();
 
-	switch(state) {
-	case osUser1:
-		play_all_files(item);
-		state = osBack;
+    switch(state) {
+    case osUser1:
+        play_all_files(item);
+        state = osBack;
 
-		break;
-	case osUser6:
-		if (item)
-			play_file(item->get_track());
+        break;
+     case osUser6:
+        if (item)
+            play_file(item->get_track());
 
-		state = osBack;
+        state = osBack;
 
-		break;
-	default:
-		break;
-	}
+        break;
+        default:
+        break;
+    }
 }
 
 
 cBrowseItem *cBrowse::get_actual_item(void)
 {
-	if (Current() < 0)
-		return NULL;
+    if (Current() < 0)
+    return NULL;
 
-	return (cBrowseItem *)Get(Current());
+    return (cBrowseItem *)Get(Current());
 }
 
 
@@ -288,22 +288,22 @@ void cBrowse::insert_items(void)
                 columns[c].del_last_entry();
         }
 
-	int column = 0;
-	cBrowseItem *item = get_actual_item();
+    int column = 0;
+    cBrowseItem *item = get_actual_item();
         if (item && item->is_node()) {
-		set_filter(item);
+        set_filter(item);
                 column = item->get_column();
                 columns[column].set_main_item(item);
                 ++column;
         }
 
-	int depth;
-	if (expand)
-		depth = num_columns;
-	else
-		depth = column + 1;
+    int depth;
+    if (expand)
+        depth = num_columns;
+    else
+        depth = column + 1;
 
-	for (const cTrackInfo *track = Cache.get_next_track(true); track;
+    for (const cTrackInfo *track = Cache.get_next_track(true); track;
              track = Cache.get_next_track()) {
 
                 if (filter_track(track))
@@ -316,14 +316,14 @@ void cBrowse::insert_items(void)
 
                         if (c == num_columns - 1)
                                 type = itemTrack;
-			else if (expand)
-				type = itemNodeOpen;
-			else
-				type = itemNodeClose;
+            else if (expand)
+                type = itemNodeOpen;
+            else
+                type = itemNodeClose;
 
-			/* don't show double nodes: */
+            /* don't show double nodes: */
                         if (type != itemTrack &&
-			    entry == columns[c].get_last_entry())
+                 entry == columns[c].get_last_entry())
                                 continue;
 
                         columns[c].set_last_entry(entry);
@@ -348,7 +348,7 @@ void cBrowse::insert_items(void)
 
                         Add(item, true, Get(Current()));
                 }
-	}
+    }
 
         SetCurrent(Get(pos));
         Display();
@@ -357,9 +357,9 @@ void cBrowse::insert_items(void)
 
 void cBrowse::delete_items(void)
 {
-	cBrowseItem *item = get_actual_item();
-	if (! item || ! item->is_node())
-		return;
+    cBrowseItem *item = get_actual_item();
+    if (! item || ! item->is_node())
+        return;
 
         for (int c = 0; c < item->get_items(); ++c)
                 Del(Current() + 1);
@@ -399,7 +399,7 @@ bool cBrowse::filter_track(const cTrackInfo *track)
 
 string cBrowse::get_category(const cBrowseItem *item)
 {
-	string category("");
+    string category("");
 
         if (item) {
                 int columns = item->get_column();
@@ -416,7 +416,7 @@ string cBrowse::get_category(const cBrowseItem *item)
                 }
         }
 
-	return category;
+    return category;
 }
 
 
@@ -452,7 +452,7 @@ string cBrowse::get_value_of_column(const cTrackInfo *track, int c)
                 case colArtistTitle:
                         col_tmp << track->get_artist() << " - "
                                 << track->get_title();
-			break;
+             break;
                 case colAlbum:
                         col_tmp << track->get_album();
                         break;
@@ -486,7 +486,7 @@ string cBrowse::get_value_of_column(const cTrackInfo *track, int c)
 
                 string col(col_tmp.str());
 
-		if (columns[c].get_cut())
+        if (columns[c].get_cut())
                         cut_string(col, columns[c].get_width() - 1);
 
                 value.append(col);
@@ -504,50 +504,50 @@ string cBrowse::get_value_of_column(const cTrackInfo *track, int c)
 
 void cBrowse::play_all_files(const cBrowseItem *node)
 {
-	if (! player) {
+    if (! player) {
                 Skins.Message(mtError, tr("No external player-plugin found"), 2);
-		return;
+        return;
         }
 
-	if (! node || ! node->is_node())
-		return;
+    if (! node || ! node->is_node())
+        return;
 
-	set_filter(node);
+    set_filter(node);
 
         string status = tr("Playing all tracks in ");
         status.append(get_category(node));
         cut_string(status, width);
         SetStatus(status.c_str());
 
-	for (const cTrackInfo *track = Cache.get_next_track(true); track;
+    for (const cTrackInfo *track = Cache.get_next_track(true); track;
              track = Cache.get_next_track()) {
 
                 if (! filter_track(track))
                         play_file(track, false);
-	}
+    }
 }
 
 
 void cBrowse::play_file(const cTrackInfo *track, bool set_status)
 {
-	if (! player) {
+    if (! player) {
                 Skins.Message(mtError, tr("No external player-plugin found"), 2);
-		return;
+        return;
         }
 
-	MP3ServiceData data;
-	data.data.filename = track->get_path().c_str();
-	data.result = 0;
+    MP3ServiceData data;
+    data.data.filename = track->get_path().c_str();
+    data.result = 0;
 
 #ifndef AUDIORECORDER_DEVEL
-	player->Service(SERVICE, &data);
+    player->Service(SERVICE, &data);
 
-	if (data.result == 0) {
-		dsyslog("[audiorecorder]: plugin %s could not play the file "
-			"%s (%s, %s())", player->Name(),
-			track->get_path().c_str(), __FILE__, __func__);
+    if (data.result == 0) {
+        dsyslog("[audiorecorder]: plugin %s could not play the file "
+            "%s (%s, %s())", player->Name(),
+            track->get_path().c_str(), __FILE__, __func__);
                 return;
-	}
+    }
 #endif /* AUDIORECORDER_DEVEL */
 
         if (set_status) {
@@ -597,8 +597,8 @@ cBrowseAction::cBrowseAction(bool node, const string &text)
 cBrowseInfo::cBrowseInfo(const cTrackInfo *track)
 :cOsdMenu(tr("Audiorecorder, Info"), 11)
 {
-	string path = track->get_path();
-	path.erase(0, cPluginAudiorecorder::get_recdir().length());
+    string path = track->get_path();
+    path.erase(0, cPluginAudiorecorder::get_recdir().length());
         Add(add_item(tr("File"), path));
 
         Add(add_item(tr("Artist"), track->get_artist()));
@@ -606,7 +606,7 @@ cBrowseInfo::cBrowseInfo(const cTrackInfo *track)
         Add(add_item(tr("Album"), track->get_album()));
         Add(add_item(tr("Genre"), track->get_genre()));
 
-       	stringstream tmp;
+        stringstream tmp;
         tmp << track->get_track();
         Add(add_item(tr("Track"), tmp.str()));
 
@@ -626,13 +626,13 @@ cBrowseInfo::cBrowseInfo(const cTrackInfo *track)
 
 cOsdItem *cBrowseInfo::add_item(const char *type, const string &text)
 {
-	string txt = type;
-	txt.append(":\t");
+    string txt = type;
+    txt.append(":\t");
 
-	if (text.empty() || text == "0")
+    if (text.empty() || text == "0")
                 txt.append(tr("unknown"));
-	else
-		txt.append(text);
+    else
+         txt.append(text);
 
-	return new cOsdItem(txt.c_str(), osUnknown, false);
+    return new cOsdItem(txt.c_str(), osUnknown, false);
 }

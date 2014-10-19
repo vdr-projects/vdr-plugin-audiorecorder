@@ -14,7 +14,7 @@ using namespace std;
 
 cXmlBase::cXmlBase(const char *_root_element)
 {
-	root_element = _root_element;
+    root_element = _root_element;
         document = NULL;
         root = NULL;
 }
@@ -35,7 +35,7 @@ bool cXmlBase::load(const string &_path)
         if (document)
                 return true;
 
-	path = _path;
+    path = _path;
 
         dsyslog("[audiorecorder]: loading xml-file (%s) (%s ,%s())",
                 path.c_str(), __FILE__, __func__);
