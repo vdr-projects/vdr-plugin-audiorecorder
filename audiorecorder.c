@@ -330,7 +330,7 @@ void cPluginAudiorecorder::probe_audio_codecs() {
         AVCodec *codec = NULL;
 
         for (c = 1; c < SetupValues.num_audio_codecs; ++c) {
-                codec = avcodec_find_encoder_by_name(audio_codecs[c]);
+                codec = avcodec_find_encoder(AV_CODEC_ID_MP3);
                 if (codec)
                         continue;
 

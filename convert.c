@@ -74,19 +74,25 @@ void cConvert::init_encoder(const char *codec, int bit_rate, int sample_rate,
         int channels)
 {
         avcodec_register_all();
-        encoder_codec = avcodec_find_encoder_by_name(codec);
+        AVCodec *encoder_codec;
+        AVCodecContext *encoder_ctx= NULL;
+        AVFrame *frame;
+        AVPacket pkt;
+
+        encoder_codec = avcodec_find_encoder(AV_CODEC_ID_MP3);
         if (! encoder_codec) {
                 dsyslog("[audiorecorder]: codec %s is not supported (%s, "
                         "%s())", codec, __FILE__,  __func__);
                 return;
         }
 
-        encoder_ctx = avcodec_alloc_context3(NULL);
+        encoder_ctx = avcodec_alloc_context3(encoder_codec);
 
-        encoder_ctx->bit_rate = bit_rate;
-        encoder_ctx->sample_rate = sample_rate;
-        encoder_ctx->channels = channels;
-        encoder_ctx->sample_fmt = AV_SAMPLE_FMT_S16; //vdrportal.de #post1214719
+        encoder_ctx->bit_rate       = bit_rate;
+        encoder_ctx->sample_fmt     = AV_SAMPLE_FMT_S16;
+        encoder_ctx->sample_rate    = sample_rate;
+//        encoder_ctx->channel_layout = channel_layout;
+        encoder_ctx->channels       = channels;
 
         encoder_open = avcodec_open2(encoder_ctx, encoder_codec, NULL);
 
@@ -102,6 +108,11 @@ void cConvert::init_encoder(const char *codec, int bit_rate, int sample_rate,
                 "initialized (%s, %s())", encoder_codec->name,
                 encoder_ctx->bit_rate, encoder_ctx->sample_rate,
                 encoder_ctx->channels, __FILE__, __func__);
+
+//      av_freep(&samples);
+//      avcodec_free_frame(&frame);
+//      avcodec_close(encoder_ctx);
+//      av_free(encoder_ctx);
 }
 
 
