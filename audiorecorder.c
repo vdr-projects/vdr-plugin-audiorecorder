@@ -35,7 +35,7 @@ using namespace std;
 /* --- cPluginAudiorecorder ------------------------------------------------- */
 
 const char *cPluginAudiorecorder::DESCRIPTION = tr("floods your disc with music");
-const char *cPluginAudiorecorder::VERSION = "2.0.0_rc4";
+const char *cPluginAudiorecorder::VERSION = "2.0.0_rc5";
 
 string cPluginAudiorecorder::recdir;
 int cPluginAudiorecorder::debug = 0;
@@ -152,7 +152,12 @@ bool cPluginAudiorecorder::Initialize(void)
         audio_codecs[0]   = "mp2";
         audio_codecs[1]   = "libmp3lame";
         audio_codecs[2]   = "mp3";
-
+/*	ToDo
+	was soll audio_codecs[2] bewirken? 
+	for mp3 encoding wird libmp3lame( external lib von lame) benutzt
+	ffmpeg, libav hat keine interne mp3 encode function
+	may be obsoleted codec from very, very old ffmpeg?
+*/
         audio_codecs_translated[0]   = tr("mp2");
         audio_codecs_translated[1]   = tr("mp3");
         audio_codecs_translated[2]   = tr("mp3");
