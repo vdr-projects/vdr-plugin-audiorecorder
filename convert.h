@@ -12,6 +12,7 @@
 extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavutil/mem.h>
+#include <libavutil/channel_layout.h> // https://www.ffmpeg.org/doxygen/2.2/libmp3lame_8c_source.html
 }
 
 
