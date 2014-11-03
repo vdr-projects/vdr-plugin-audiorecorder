@@ -73,9 +73,8 @@ void  cConvert::init_decoder(void)
 void cConvert::init_encoder(const char *codec, int bit_rate, int sample_rate,
         int channels)
 {
-        avcodec_register_all(); // wird das hier wirklich gebraucht? still initialized in audiorecorder.c
+        // avcodec_register_all(); // wird das hier wirklich gebraucht? still initialized in audiorecorder.c
 
-//        encoder_codec = avcodec_find_encoder(AV_CODEC_ID_MP3); // register codec direct for debug
         encoder_codec = avcodec_find_encoder_by_name(codec);
         if (! encoder_codec) {
                 dsyslog("[audiorecorder]: codec %s is not supported (%s, "
@@ -105,7 +104,6 @@ void cConvert::init_encoder(const char *codec, int bit_rate, int sample_rate,
                 "initialized (%s, %s())", encoder_codec->name,
                 encoder_ctx->bit_rate, encoder_ctx->sample_rate,
                 encoder_ctx->channels, __FILE__, __func__);
-
 }
 
 
