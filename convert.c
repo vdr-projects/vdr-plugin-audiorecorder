@@ -89,9 +89,9 @@ void cConvert::init_encoder(const char *codec, int bit_rate, int sample_rate,
         encoder_ctx = avcodec_alloc_context3(encoder_codec);
 
         encoder_ctx->bit_rate       = bit_rate;
-        encoder_ctx->sample_fmt     = AV_SAMPLE_FMT_S16;
+        encoder_ctx->sample_fmt     = AV_SAMPLE_FMT_S16P;
         encoder_ctx->sample_rate    = sample_rate;
-//        encoder_ctx->channel_layout = channel_layout;
+//        encoder_ctx->channel_layout = AV_CH_LAYOUT_STEREO; // <-- compiliert nicht,
         encoder_ctx->channels       = channels;
 
         encoder_open = avcodec_open2(encoder_ctx, encoder_codec, NULL);
