@@ -74,10 +74,10 @@ void cConvert::init_encoder(const char *codec, int bit_rate, int sample_rate,
         int channels)
 {
         avcodec_register_all();
-        AVCodec *encoder_codec;
-        AVCodecContext *encoder_ctx= NULL;
-        AVFrame *frame;
-        AVPacket pkt;
+//        AVCodec *encoder_codec;
+//        AVCodecContext *encoder_ctx= NULL;
+//        AVFrame *frame;
+//        AVPacket pkt;
 
         encoder_codec = avcodec_find_encoder(AV_CODEC_ID_MP3);
         if (! encoder_codec) {
@@ -86,7 +86,7 @@ void cConvert::init_encoder(const char *codec, int bit_rate, int sample_rate,
                 return;
         }
 
-        encoder_ctx = avcodec_alloc_context3(encoder_codec);
+        encoder_ctx = avcodec_alloc_context3(NULL);
 
         encoder_ctx->bit_rate       = bit_rate;
         encoder_ctx->sample_fmt     = AV_SAMPLE_FMT_S16P;
