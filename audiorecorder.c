@@ -178,9 +178,6 @@ bool cPluginAudiorecorder::Initialize(void)
 bool cPluginAudiorecorder::Start(void)
 {
         /* initialize libavcodec */
-#if LIBAVCODEC_VERSION_MAJOR < 54
-        avcodec_init();
-#endif
         avcodec_register_all();
 
         probe_audio_codecs();
@@ -330,7 +327,8 @@ void cPluginAudiorecorder::probe_audio_codecs() {
         AVCodec *codec = NULL;
 
         for (c = 1; c < SetupValues.num_audio_codecs; ++c) {
-                codec = avcodec_find_encoder(AV_CODEC_ID_MP3);
+//                codec = avcodec_find_encoder(AV_CODEC_ID_MP3); /* codec hard enabled for libmp3 debug */
+                codec = avcodec_find_encoder_by_name(audio_codecs[c]);
                 if (codec)
                         continue;
 
