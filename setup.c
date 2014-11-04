@@ -8,17 +8,17 @@
 
 /* default setup values: */
 struct setup_values SetupValues = {
-    1,  /* receiving mode on start is 'on' */
+        0,  /* receiving mode on start is 'on' */
         5,  /* max. receivers */
         50, /* min. free space (in mb) */
-    3,  /* default view 'by date' */
+        3,  /* default view 'by date' */
         1,  /* pause postprocessing if osd is opened */
         8,  /* max. tracks in postprocessing queue */
         1,  /* fade in mode */
         9,  /* fade in seconds */
         2,  /* fade out mode */
         12, /* fade out seconds */
-        0,  /* audio codec */
+        1,  /* audio codec */
         NUM_CODECS,  /* number of audio codecs */
         9,  /* bitrate */
         0   /* file_pattern */
