@@ -25,9 +25,11 @@ struct setup_values SetupValues = {
 };
 
 
-const char *audio_codecs[NUM_CODECS]   = { "mp2", "libmp3lame", "mp3" };
+//const char *audio_codecs[NUM_CODECS]   = { "mp2", "libmp3lame", "mp3" };
+const char *audio_codecs[NUM_CODECS]   = { "mp2", "libmp3lame" };
 
-const char *audio_codecs_translated[NUM_CODECS] = { tr("mp2"), tr("mp3"), tr("mp3") };
+//const char *audio_codecs_translated[NUM_CODECS] = { tr("mp2"), tr("mp3"), tr("mp3") };
+const char *audio_codecs_translated[NUM_CODECS] = { tr("mp2"), tr("mp3") };
 
 const char *fade_types[NUM_FADE_TYPES] = { tr("off"), tr("linear"), tr("exponential") };
 

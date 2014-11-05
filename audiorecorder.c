@@ -151,16 +151,11 @@ bool cPluginAudiorecorder::Initialize(void)
 
         audio_codecs[0]   = "mp2";
         audio_codecs[1]   = "libmp3lame";
-        audio_codecs[2]   = "mp3";
-/*	ToDo
-	was soll audio_codecs[2] bewirken? 
-	for mp3 encoding wird libmp3lame( external lib von lame) benutzt
-	ffmpeg, libav hat keine interne mp3 encode function
-	may be obsoleted codec from very, very old ffmpeg?
-*/
+//        audio_codecs[2]   = "mp3"; // not needed, used
+
         audio_codecs_translated[0]   = tr("mp2");
         audio_codecs_translated[1]   = tr("mp3");
-        audio_codecs_translated[2]   = tr("mp3");
+//        audio_codecs_translated[2]   = tr("mp3"); // not needed, used
 
         fade_types[0]     = tr("off");
         fade_types[1]     = tr("linear");
@@ -332,7 +327,6 @@ void cPluginAudiorecorder::probe_audio_codecs() {
         AVCodec *codec = NULL;
 
         for (c = 1; c < SetupValues.num_audio_codecs; ++c) {
-//                codec = avcodec_find_encoder(AV_CODEC_ID_MP3); /* codec hard enabled for libmp3 debug */
                 codec = avcodec_find_encoder_by_name(audio_codecs[c]);
                 if (codec)
                         continue;

@@ -31,7 +31,8 @@ struct setup_values {
 
 extern struct setup_values SetupValues;
 
-#define NUM_CODECS  3
+//#define NUM_CODECS  3
+#define NUM_CODECS  2
 extern const char *audio_codecs[NUM_CODECS];
 extern const char *audio_codecs_translated[NUM_CODECS];
 

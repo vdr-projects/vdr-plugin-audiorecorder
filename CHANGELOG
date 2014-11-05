@@ -1,0 +1,5 @@
+* audiorecorder-2.0.0_rc5
+- extended audiorecoder.conf, thanks to wolfi.m @ vdrportal.de
+- removed mp3 codec, not available, not needed, plugin use only libmp3lame for encoding to .mp3 files
+  (audiorecorder.c, setup.c, setup.h)
+  this fix the false/positiv error "...is not compiled with mp3 support.."

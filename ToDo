@@ -1,0 +1,10 @@
+- es werden keine .mp2 files erstellt bei auswahl mp2 im OSD plugin setup
+  fehler: das  kopieren von .tmp.m2 files functioniert nicht ( convert.c )
+  es wird keine dir ARTIST/TITLE.mp2 erstellt
+  braucht irgendwer eigentlich .mp2 files???
+  es sollte reichen wenn die auswahl mp2 im OSD plugin setup enfernt wird, so dass das plugin
+  only fuer mp3 functioniert
+
+- fix deprecated warnings, obsolete in (libav-10, ffmepg-2.?.?)
+  convert to use avcodec_decode_audio4 (convert.c)
+  convert to use avcodec_encode_audio2 (convert.c)
