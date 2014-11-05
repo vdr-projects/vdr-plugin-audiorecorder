@@ -37,6 +37,16 @@ APIVERSION = $(call PKGCFG,apiversion)
 
 ### Allow user defined options to overwrite defaults:
 
+## start new avcodec
+## this is only used for plugin developer!!!
+## convert deprecated audio function in convert.c
+## avcodec_decode_audio3 --> avcodec_decode_audio4
+## avcodec_encode_audio --> avcodec_encode_audio2
+
+#AVCODEC_NEW = 1
+
+## end new avcodec
+
 -include $(PLGCFG)
 
 ### The name of the distribution archive:

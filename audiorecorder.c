@@ -35,7 +35,7 @@ using namespace std;
 /* --- cPluginAudiorecorder ------------------------------------------------- */
 
 const char *cPluginAudiorecorder::DESCRIPTION = tr("floods your disc with music");
-const char *cPluginAudiorecorder::VERSION = "2.0.0_rc5";
+const char *cPluginAudiorecorder::VERSION = "2.0.0_rc6";
 
 string cPluginAudiorecorder::recdir;
 int cPluginAudiorecorder::debug = 0;

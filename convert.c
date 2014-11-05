@@ -73,8 +73,6 @@ void  cConvert::init_decoder(void)
 void cConvert::init_encoder(const char *codec, int bit_rate, int sample_rate,
         int channels)
 {
-        // avcodec_register_all(); // wird das hier wirklich gebraucht? still initialized in audiorecorder.c
-
         encoder_codec = avcodec_find_encoder_by_name(codec);
         if (! encoder_codec) {
                 dsyslog("[audiorecorder]: codec %s is not supported (%s, "
@@ -114,7 +112,7 @@ void cConvert::decode_mpa_frame(mpeg_audio_frame *mpa_frame)
                 return;
         }
 
-// ToDo: convert to use avcodec_decode_audio4
+#ifndef AUDIOCODEC_NEW
         AVPacket avpkt;
         av_init_packet(&avpkt);
         avpkt.data = mpa_frame->data;
@@ -122,6 +120,11 @@ void cConvert::decode_mpa_frame(mpeg_audio_frame *mpa_frame)
         decoder_buf.length = AVCODEC_MAX_AUDIO_FRAME_SIZE;
         int len = avcodec_decode_audio3(decoder_ctx, (short *)decoder_buf.data,
                 &decoder_buf.length, &avpkt);
+#else
+#error "avcodec_decode_audio4 not implemented yet!"
+// ToDo
+
+#endif
 }
 
 
@@ -153,10 +156,14 @@ abuffer *cConvert::reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
                 }
         }
 
-// ToDo: avcodec_encode_audio is deprecated,..
+#ifndef AUDICODEC_NEW
         encoder_buf.offset = avcodec_encode_audio(encoder_ctx, encoder_buf.data,
                 encoder_buf.length, (short *)decoder_buf.data);
         /* encoder_buf.offset is used to save the size of the encoded frame */
+#else
+#error "avcodec_encode_audio2 not imlemented yet!"
+// ToDo
 
+#endif
         return &encoder_buf;
 }
