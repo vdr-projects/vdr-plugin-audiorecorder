@@ -112,7 +112,7 @@ void cConvert::decode_mpa_frame(mpeg_audio_frame *mpa_frame)
                 return;
         }
 
-#ifndef AVCODEC_NEW
+//#ifndef AVCODEC_NEW
         AVPacket avpkt;
         av_init_packet(&avpkt);
         avpkt.data = mpa_frame->data;
@@ -120,11 +120,11 @@ void cConvert::decode_mpa_frame(mpeg_audio_frame *mpa_frame)
         decoder_buf.length = AVCODEC_MAX_AUDIO_FRAME_SIZE;
         int len = avcodec_decode_audio3(decoder_ctx, (short *)decoder_buf.data,
                 &decoder_buf.length, &avpkt);
-#else
-#error "avcodec_decode_audio4 not implemented yet!"
+//#else
+//#error "avcodec_decode_audio4 not implemented yet!"
 // ToDo
 
-#endif
+//#endif
 }
 
 
@@ -161,9 +161,35 @@ abuffer *cConvert::reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
                 encoder_buf.length, (short *)decoder_buf.data);
         /* encoder_buf.offset is used to save the size of the encoded frame */
 #else
-#error "avcodec_encode_audio2 not imlemented yet!"
-// ToDo
+//#error "avcodec_encode_audio2 not imlemented yet!"
+// https://www.ffmpeg.org/doxygen/1.0/group__lavc__encoding.html#gf12a9da0d33f50ff406e03572fab4763
+// https://www.ffmpeg.org/doxygen/1.0/decoding__encoding_8c-source.html#l00102
+/* int avcodec_encode_audio2
+		(
+		AVCodecContext *  	avctx,
+		AVPacket *  	avpkt,
+		const AVFrame *  	frame,
+		int *  	got_packet_ptr
+		) */
+        AVFrame *frame;
+        AVPacket avpkt;
+        av_init_packet(&avpkt);
+        avpkt.data = map_frame->data;
+        avpkt.size = map_frame->size;
+        int got_output;
 
+        /* frame containing input raw audio */
+        frame = avcodec_alloc_frame();
+        if (!frame) {
+            fprintf(stderr, "Could not allocate audio frame\n");
+            exit(1);
+         }
+
+        encoder_buf.offset = avcodec_encode_audio2(encoder_ctx, &avpkt, frame, &got_output);
+        if (ret < 0) {
+            fprintf(stderr, "Error encoding audio frame\n");
+            exit(1);
+        }
 #endif
         return &encoder_buf;
 }
