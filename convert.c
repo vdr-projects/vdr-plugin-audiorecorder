@@ -112,7 +112,7 @@ void cConvert::decode_mpa_frame(mpeg_audio_frame *mpa_frame)
                 return;
         }
 
-#ifndef AUDIOCODEC_NEW
+#ifndef AVCODEC_NEW
         AVPacket avpkt;
         av_init_packet(&avpkt);
         avpkt.data = mpa_frame->data;
@@ -156,7 +156,7 @@ abuffer *cConvert::reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
                 }
         }
 
-#ifndef AUDICODEC_NEW
+#ifndef AVCODEC_NEW
         encoder_buf.offset = avcodec_encode_audio(encoder_ctx, encoder_buf.data,
                 encoder_buf.length, (short *)decoder_buf.data);
         /* encoder_buf.offset is used to save the size of the encoded frame */
