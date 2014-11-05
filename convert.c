@@ -175,8 +175,8 @@ abuffer *cConvert::reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
         AVPacket avpkt;
         av_init_packet(&avpkt);
         avpkt.data = map_frame->data;
-        avpkt.size = map_frame->size;
-        int got_output;
+        avpkt.size = map_frame->lenght;
+        int ret, got_output;
 
         /* frame containing input raw audio */
         frame = avcodec_alloc_frame();
