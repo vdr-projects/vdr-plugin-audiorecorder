@@ -43,7 +43,7 @@ APIVERSION = $(call PKGCFG,apiversion)
 ## avcodec_decode_audio3 --> avcodec_decode_audio4
 ## avcodec_encode_audio --> avcodec_encode_audio2
 
-#AVCODEC_NEW = 1
+#DEFINES += -DAVCODEC_NEW
 
 ## end new avcodec
 
