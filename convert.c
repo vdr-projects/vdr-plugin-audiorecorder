@@ -161,7 +161,9 @@ abuffer *cConvert::reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
                 encoder_buf.length, (short *)decoder_buf.data);
         /* encoder_buf.offset is used to save the size of the encoded frame */
 #else
-//#error "avcodec_encode_audio2 not imlemented yet!"
+#warning "you have enabled -DAVCODEC_NEW in Makefile"
+#warning "this is still under development,"
+#warning "and will compile not working code..."
 // https://www.ffmpeg.org/doxygen/1.0/group__lavc__encoding.html#gf12a9da0d33f50ff406e03572fab4763
 // https://www.ffmpeg.org/doxygen/1.0/decoding__encoding_8c-source.html#l00102
 /* int avcodec_encode_audio2
@@ -182,14 +184,18 @@ abuffer *cConvert::reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
         /* frame containing input raw audio */
         frame = avcodec_alloc_frame();
         if (!frame) {
-            fprintf(stderr, "Could not allocate audio frame\n");
-            exit(1);
+            dsyslog("[audiorecorder]: Could not allocate audio frame (%s, " "%s())",  __FILE__,  __func__);
+            return;
+//            fprintf(stderr, "Could not allocate audio frame\n");
+//            exit(1);
          }
 
         encoder_buf.offset = avcodec_encode_audio2(encoder_ctx, &avpkt, frame, &got_output);
         if (ret < 0) {
-            fprintf(stderr, "Error encoding audio frame\n");
-            exit(1);
+            dsyslog("[audiorecorder]: Error encoding audio frame (%s, " "%s())",  __FILE__,  __func__);
+            return;
+//            fprintf(stderr, "Error encoding audio frame\n");
+//            exit(1);
         }
 #endif
         return &encoder_buf;
