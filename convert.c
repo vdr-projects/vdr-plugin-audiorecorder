@@ -171,6 +171,7 @@ abuffer *cConvert::reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
 		const AVFrame *  	frame,
 		int *  	got_packet_ptr
 		) */
+        AVCodecContext *codec_ctx;
         AVFrame *frame;
         AVPacket avpkt;
         av_init_packet(&avpkt);

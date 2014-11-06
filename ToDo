@@ -8,3 +8,7 @@
 - fix deprecated warnings, obsolete in (libav-10, ffmepg-2.?.?)
   convert to use avcodec_decode_audio4 (convert.c)
   convert to use avcodec_encode_audio2 (convert.c)
+
+- ffmpeg version 2.4.1
+  error --> [audiorecorder]: could not open codec mp2 (convert.c, init_encoder())
+  bei mp2 decoding
