@@ -174,29 +174,15 @@ abuffer *cConvert::reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
 		int *  	got_packet_ptr
 		) */
         AVCodecContext *codec_ctx;
-        AVFrame *frame;
+        AVFrame *frame = avcodec_alloc_frame; // libav10 av_frame_alloc
         AVPacket avpkt;
         av_init_packet(&avpkt);
         avpkt.data = mpa_frame->data;
         avpkt.size = mpa_frame->length;
         int ret, got_output;
 
-        /* frame containing input raw audio */
-        frame = avcodec_alloc_frame();
-        if (! frame) {
-            dsyslog("[audiorecorder]: Could not allocate audio frame (%s, " "%s())",  __FILE__,  __func__);
-//            return;
-//            fprintf(stderr, "Could not allocate audio frame\n");
-            exit(1);
-         }
 
         encoder_buf.offset = avcodec_encode_audio2(encoder_ctx, &avpkt, frame, &got_output);
-        if ( ret < 0 ) {
-            dsyslog("[audiorecorder]: Error encoding audio frame (%s, " "%s())",  __FILE__,  __func__);
-//            return;
-//            fprintf(stderr, "Error encoding audio frame\n");
-            exit(1);
-        }
 #endif
         return &encoder_buf;
 }
