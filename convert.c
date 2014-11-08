@@ -112,19 +112,28 @@ void cConvert::decode_mpa_frame(mpeg_audio_frame *mpa_frame)
                 return;
         }
 
-//#ifndef AVCODEC_NEW
         AVPacket avpkt;
         av_init_packet(&avpkt);
         avpkt.data = mpa_frame->data;
         avpkt.size = mpa_frame->length;
         decoder_buf.length = AVCODEC_MAX_AUDIO_FRAME_SIZE;
+#ifndef AVCODEC_NEW
         int len = avcodec_decode_audio3(decoder_ctx, (short *)decoder_buf.data,
                 &decoder_buf.length, &avpkt);
-//#else
-//#error "avcodec_decode_audio4 not implemented yet!"
-// ToDo
+#else
+#warning "you have enabled -DAVCODEC_NEW in Makefile"
+#warning "this is still under development,"
+#warning "and will compile not working code...(convert.c, decode_mpa_frame)"
+// functioniert, aber es wird nur ein mp3 file mit audio level 0 erzeugt :(
 
-//#endif
+        AVFrame *frame = avcodec_alloc_frame(); //av_frame_alloc # libav10
+        int got_output;
+
+        int len = avcodec_decode_audio4(decoder_ctx, frame, &got_output, &avpkt);
+
+        avcodec_free_frame(&frame); // av_free_frame(&frame); // libav10
+//        avcodec_close(decoder_ctx); // muss codec hier geschlossen werden?
+#endif
 }
 
 
@@ -163,16 +172,9 @@ abuffer *cConvert::reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
 #else
 #warning "you have enabled -DAVCODEC_NEW in Makefile"
 #warning "this is still under development,"
-#warning "and will compile not working code..."
+#warning "and will compile not working code, (convert.c, reencode_mpa_frame)"
 // https://www.ffmpeg.org/doxygen/1.0/group__lavc__encoding.html#gf12a9da0d33f50ff406e03572fab4763
 // https://www.ffmpeg.org/doxygen/1.0/decoding__encoding_8c-source.html#l00102
-/* int avcodec_encode_audio2
-		(
-		AVCodecContext *  	avctx,
-		AVPacket *  	avpkt,
-		const AVFrame *  	frame,
-		int *  	got_packet_ptr
-		) */
         AVCodecContext *codec_ctx;
         AVFrame *frame = avcodec_alloc_frame; // libav10 av_frame_alloc
         AVPacket avpkt;
