@@ -128,7 +128,7 @@ void cConvert::decode_mpa_frame(mpeg_audio_frame *mpa_frame)
 
         AVCodecContext *decoder_ctx;
 
-        AVFrame *frame = avcodec_alloc_frame(); //av_frame_alloc # libav10
+        AVFrame *frame = avcodec_alloc_frame(); //av_frame_alloc() # libav10
         int got_output;
 
         int len = avcodec_decode_audio4(decoder_ctx, frame, &got_output, &avpkt);
@@ -178,7 +178,7 @@ abuffer *cConvert::reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
 // https://www.ffmpeg.org/doxygen/1.0/group__lavc__encoding.html#gf12a9da0d33f50ff406e03572fab4763
 // https://www.ffmpeg.org/doxygen/1.0/decoding__encoding_8c-source.html#l00102
         AVCodecContext *encoder_ctx;
-        AVFrame *frame = avcodec_alloc_frame; // libav10 av_frame_alloc
+        AVFrame *frame = avcodec_alloc_frame(); // libav10 av_frame_alloc()
         AVPacket avpkt;
         av_init_packet(&avpkt);
         avpkt.data = mpa_frame->data;
