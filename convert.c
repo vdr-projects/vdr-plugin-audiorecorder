@@ -124,9 +124,6 @@ void cConvert::decode_mpa_frame(mpeg_audio_frame *mpa_frame)
 #warning "you have enabled -DAVCODEC_NEW in Makefile"
 #warning "this is still under development,"
 #warning "and will compile not working code...(convert.c, decode_mpa_frame)"
-// functioniert, aber es wird nur ein mp3 file mit audio level 0 erzeugt :(
-
-        AVCodecContext *decoder_ctx;
 
 #if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(55,34,1)
         AVFrame *frame = avcodec_alloc_frame(); // libav9
@@ -146,7 +143,7 @@ void cConvert::decode_mpa_frame(mpeg_audio_frame *mpa_frame)
 //        avcodec_close(decoder_ctx); // muss codec hier geschlossen werden?
 #endif
 
-#endif // AVCODEC_NEW
+#endif /* AVCODEC_NEW */
 }
 
 
@@ -188,7 +185,6 @@ abuffer *cConvert::reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
 #warning "and will compile not working code, (convert.c, reencode_mpa_frame)"
 // https://www.ffmpeg.org/doxygen/1.0/group__lavc__encoding.html#gf12a9da0d33f50ff406e03572fab4763
 // https://www.ffmpeg.org/doxygen/1.0/decoding__encoding_8c-source.html#l00102
-        AVCodecContext *encoder_ctx;
 #if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(55,34,1)
         AVFrame *frame = avcodec_alloc_frame(); // libav9
 #else
@@ -200,8 +196,15 @@ abuffer *cConvert::reencode_mpa_frame(mpeg_audio_frame *mpa_frame,
         avpkt.size = mpa_frame->length;
         int ret, got_output;
 
-
         encoder_buf.offset = avcodec_encode_audio2(encoder_ctx, &avpkt, frame, &got_output);
-#endif // AVCODEC_NEW
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(55,34,1)
+        avcodec_free_frame(&frame); // av_free_frame(&frame); // libav10
+//        avcodec_close(decoder_ctx); // muss codec hier geschlossen werden?
+#else
+        av_frame_free(&frame); // libav10
+//        avcodec_close(decoder_ctx); // muss codec hier geschlossen werden?
+#endif
+
+#endif /* AVCODEC_NEW */
         return &encoder_buf;
 }
